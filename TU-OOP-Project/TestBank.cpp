@@ -30,10 +30,6 @@ bool isValidHolder(const string& holder) {
     return (holder.length() >= 8 && holder.length() <= 30) && !isValidNumber(holder);
 }
 
-bool isValidInterestRate(const string& rateStr) {
-    return rateStr.length() <= 2 && isValidNumber(rateStr);
-}
-
 int main() {
     vector<SavingAccount> accounts;
 
@@ -64,7 +60,7 @@ int main() {
                 throw invalid_argument("Account holder must be between 8 and 30 characters and cannot contain any digits.");
             if (!isValidNumber(balStr))
                 throw invalid_argument("Balance must be a valid number.");
-            if (!isValidInterestRate(rateStr))
+            if (!isValidNumber(rateStr))
                 throw invalid_argument("Interest rate must be a valid number.");
 
             accNum = stoi(accNumStr);
@@ -72,6 +68,7 @@ int main() {
             rate = stod(rateStr);
 
             if (bal < 0) throw invalid_argument("Balance cannot be negative.");
+            if (rate > 100) throw invalid_argument("Interest rate cannot be more than 100%.");
             if (rate < 0) throw invalid_argument("Interest rate cannot be negative.");
 
             accounts.emplace_back(accNum, holder, bal, rate);
