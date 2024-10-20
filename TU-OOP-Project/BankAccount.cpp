@@ -14,7 +14,7 @@ public:
         : accountNumber(accNum), accountHolder(holder), balance(bal) {}
 
     double getBalance() const {
-        return balance + 1;
+        return balance;
     }
 
     void deposit(double amount) {
